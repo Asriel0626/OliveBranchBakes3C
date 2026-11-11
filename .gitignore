@@ -1,0 +1,7 @@
+# Visual Studio / .NET generated outputs
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+TestResults/

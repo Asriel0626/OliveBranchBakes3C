@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>OliveBranchBakes</AssemblyName>
+    <RootNamespace>OliveBranchBakes</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="Assets\*.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Forms\WelcomeForm.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\WelcomeForm.Designer.cs"><DependentUpon>WelcomeForm.cs</DependentUpon></Compile>
+    <Compile Update="Forms\CustomerOrderForm.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\CustomerOrderForm.Designer.cs"><DependentUpon>CustomerOrderForm.cs</DependentUpon></Compile>
+    <Compile Update="Forms\CustomerAccountForm.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\CustomerAccountForm.Designer.cs"><DependentUpon>CustomerAccountForm.cs</DependentUpon></Compile>
+    <Compile Update="Forms\OrderSummaryForm.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\OrderSummaryForm.Designer.cs"><DependentUpon>OrderSummaryForm.cs</DependentUpon></Compile>
+    <Compile Update="Forms\AdministratorLoginForm.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\AdministratorLoginForm.Designer.cs"><DependentUpon>AdministratorLoginForm.cs</DependentUpon></Compile>
+    <Compile Update="Forms\AdministratorConsoleForm.cs"><SubType>Form</SubType></Compile>
+    <Compile Update="Forms\AdministratorConsoleForm.Designer.cs"><DependentUpon>AdministratorConsoleForm.cs</DependentUpon></Compile>
+  </ItemGroup>
+</Project>
