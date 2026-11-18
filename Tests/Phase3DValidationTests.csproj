@@ -1,0 +1,17 @@
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program3DValidation.cs" />
+    <Compile Include="../OliveBranchBakes/Models/*.cs" />
+    <Compile Include="../OliveBranchBakes/Data/*.cs" />
+    <Compile Include="../OliveBranchBakes/Services/*.cs" />
+  </ItemGroup>
+</Project>

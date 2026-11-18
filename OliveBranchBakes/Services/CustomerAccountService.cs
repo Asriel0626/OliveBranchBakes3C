@@ -137,6 +137,18 @@ public sealed class CustomerAccountService
             .ToList();
     }
 
+
+    public IReadOnlyList<BakeryOrder> GetUpcomingOrders()
+    {
+        return GetOrderHistory()
+            .Where(order =>
+                order.PickupAt > DateTime.Now &&
+                order.Status != OrderStatus.PickedUp &&
+                order.Status != OrderStatus.Cancelled)
+            .OrderBy(order => order.PickupAt)
+            .ToList();
+    }
+
     private static string NormalizeEmail(string email)
     {
         if (string.IsNullOrWhiteSpace(email))

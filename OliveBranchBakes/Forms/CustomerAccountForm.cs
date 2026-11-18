@@ -12,6 +12,8 @@ public partial class CustomerAccountForm : Form
     private readonly TextBox _phone = new();
     private readonly TextBox _history = new();
 
+    private readonly CheckBox _upcomingOnly = new();
+
     public CustomerAccountForm()
     {
         InitializeComponent();
@@ -99,8 +101,23 @@ public partial class CustomerAccountForm : Form
         accountRightTitle.Text = "Your saved orders";
         accountRightText.Visible = false;
 
+        _upcomingOnly.Name = "upcomingOrdersOnly";
+        _upcomingOnly.Text = "UPCOMING PICKUPS ONLY";
+        _upcomingOnly.SetBounds(22, 70, 337, 35);
+        _upcomingOnly.Font = new Font("Segoe UI", 12f);
+        _upcomingOnly.ForeColor = accountRightTitle.ForeColor;
+        _upcomingOnly.BackColor = accountRight.BackColor;
+        _upcomingOnly.AutoSize = false;
+        _upcomingOnly.TabIndex = 0;
+        _upcomingOnly.Enabled = false;
+
+        _upcomingOnly.CheckedChanged += (_, _) => RefreshAccount();
+
+        accountRight.Controls.Add(_upcomingOnly);
+
+
         _history.Name = "accountHistory";
-        _history.SetBounds(22, 85, 337, 323);
+        _history.SetBounds(22, 110, 337, 300);
         _history.Multiline = true;
         _history.ReadOnly = true;
         _history.WordWrap = true;
@@ -109,14 +126,14 @@ public partial class CustomerAccountForm : Form
         _history.BackColor = accountRight.BackColor;
         _history.ForeColor = accountRightText.ForeColor;
         _history.Font = new Font("Segoe UI", 14f);
-        _history.TabIndex = 0;
+        _history.TabIndex = 1;
 
         accountRight.Controls.Add(_history);
 
         accountSummary.SetBounds(21, 430, 337, 50);
         accountSummary.Font = new Font(
             "Segoe UI", 14f, FontStyle.Bold);
-        accountSummary.TabIndex = 1;
+        accountSummary.TabIndex = 2;
 
         accountBottom.SetBounds(40, 635, 1050, 65);
         accountBottom.Font = new Font("Segoe UI", 14f);
@@ -126,6 +143,7 @@ public partial class CustomerAccountForm : Form
     {
         Customer? customer = AppData.Accounts.CurrentCustomer;
         bool signedIn = customer is not null;
+        _upcomingOnly.Enabled = signedIn;
 
         signIn.Text = signedIn ? "SIGN OUT" : "SIGN IN";
         register.Enabled = !signedIn;
@@ -149,17 +167,24 @@ public partial class CustomerAccountForm : Form
             accountHeader.Text = "Customer account";
         }
 
-        var orders = AppData.Accounts.GetOrderHistory();
+
+        var orders = signedIn && _upcomingOnly.Checked
+            ? AppData.Accounts.GetUpcomingOrders()
+            : AppData.Accounts.GetOrderHistory();
+
 
         if (!signedIn)
         {
             _history.Text = "Sign in to view your order history.";
         }
+
         else if (orders.Count == 0)
         {
-            _history.Text =
-                "No saved orders yet. Start an order from the menu.";
+            _history.Text = _upcomingOnly.Checked
+                ? "No upcoming pickup orders."
+                : "No saved orders yet. Start an order from the menu.";
         }
+
         else
         {
             _history.Text = string.Join(

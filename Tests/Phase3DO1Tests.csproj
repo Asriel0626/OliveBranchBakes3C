@@ -1,0 +1,18 @@
+
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="ProgramO1.cs" />
+    <Compile Include="../OliveBranchBakes/Models/*.cs" />
+    <Compile Include="../OliveBranchBakes/Services/SchedulingService.cs" />
+    <Compile Include="../OliveBranchBakes/Services/PickupService.cs" />
+    <Compile Include="../OliveBranchBakes/Services/ShoppingCartService.cs" />
+  </ItemGroup>
+</Project>
